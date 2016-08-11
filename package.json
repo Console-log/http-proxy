@@ -1,0 +1,23 @@
+{
+  "name": "http-proxy",
+  "version": "1.0.0",
+  "description": "node-http-proxy",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Console-log/http-proxy.git"
+  },
+  "keywords": [
+    "node-http-proxy"
+  ],
+  "author": "Jst",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Console-log/http-proxy/issues"
+  },
+  "homepage": "https://github.com/Console-log/http-proxy#readme"
+}
