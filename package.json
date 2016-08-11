@@ -4,8 +4,7 @@
   "description": "node-http-proxy",
   "main": "server.js",
   "scripts": {
-    "test": "node server",
-    "start": "node server.js"
+    "start": "node server"
   },
   "repository": {
     "type": "git",
