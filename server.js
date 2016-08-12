@@ -4,7 +4,9 @@ var path=require('path');
 var fs=require('fs');
 
 var conf=require('./config/config');
-var mime=require('./mime/mime')
+var mime=require('./mime/mime');
+
+var port=process.argv[2]||8080;
 
 var server=http.createServer(function(req,res){
     var request;
@@ -22,8 +24,9 @@ var server=http.createServer(function(req,res){
         headers:req.headers
     };
 
-    if(addr.host==conf.host && ext_reg.test(path.parse(req.url).ext) && path.parse(addr.pathname).name!='config'){
-        local_path=path.join(conf.local,addr.pathname);
+    if(addr.href.match(conf.host+conf.host_path) && ext_reg.test(path.parse(req.url).ext) && path.parse(addr.pathname).name!='config'){
+
+        local_path=path.join(conf.local,addr.pathname.replace(conf.host_path,''));
         console.log(local_path);
         fs.exists(local_path,function(re){
             if(re){
@@ -57,7 +60,7 @@ var server=http.createServer(function(req,res){
             res.end(req_data);
         });
     }).on('error',function(err){
-        console.log(err);
+        console.log(addr.path,err);
         res.end('<h1 style="text-align:center;margin-top:50px">Request Error<h1>');
     });
     if(req.method=='POST'){
@@ -72,6 +75,10 @@ var server=http.createServer(function(req,res){
     };
 });
 
-server.listen(8080,function () {
-    console.log('Node listen 8080...');
+server.listen(port,function () {
+    console.log('Node listen '+port+'...');
 });
+
+server.on('error',function(err){
+    console.log(err)
+})
