@@ -25,9 +25,9 @@ var server=http.createServer(function(req,res){
     };
 
     if(addr.href.match(conf.host+conf.host_path) && ext_reg.test(path.parse(req.url).ext) && path.parse(addr.pathname).name!='config'){
-
         local_path=path.join(conf.local,addr.pathname.replace(conf.host_path,''));
         console.log(local_path);
+
         fs.exists(local_path,function(re){
             if(re){
                 fs.readFile(local_path, function(err,file) {
