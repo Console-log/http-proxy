@@ -23,8 +23,7 @@ var server=http.createServer(function(req,res){
         path:addr.path,
         headers:req.headers
     };
-
-    if(addr.href.match(conf.host+conf.host_path) && ext_reg.test(path.parse(req.url).ext) && path.parse(addr.pathname).name!='config'){
+    if(addr.href.match(conf.host+conf.host_path) && ext_reg.test(path.parse(addr.pathname).ext) && path.parse(addr.pathname).name!='config'){
         local_path=path.join(conf.local,addr.pathname.replace(conf.host_path,''));
         console.log(local_path);
 
@@ -35,7 +34,7 @@ var server=http.createServer(function(req,res){
                         res.writeHead(500, {'Content-Type': 'text/plain'});
                         res.end(err);
                     } else {
-                        file_ext=path.parse(req.url).ext.slice(1);
+                        file_ext=path.parse(addr.pathname).ext.slice(1);
                         content_type=mime[file_ext]||'text/plain';
                         res.writeHead(200, {'Content-Type': content_type});
                         res.end(file);
